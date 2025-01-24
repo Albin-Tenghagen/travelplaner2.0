@@ -4,12 +4,16 @@ import ActivityList from "./ActivityList";
 // * @param {Object} props - The props object.
 // * @param {Activity[]} props.ActivityArray - Array of activity objects to display
 
-function Aside({ ActivityArray }) {
+function Aside({ ActivityArray, onEdit, onDelete }) {
   console.log("Aside Array", ActivityArray);
   return (
     <section>
       {/* Pass the ActivityArray to the AktivityList component */}
-      <ActivityList ActivityArray={ActivityArray} />
+      <ActivityList
+        ActivityArray={ActivityArray}
+        onEdit={onEdit}
+        onDelete={onDelete}
+      />
     </section>
   );
 }

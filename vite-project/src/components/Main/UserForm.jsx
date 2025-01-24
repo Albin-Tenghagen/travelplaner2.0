@@ -58,13 +58,13 @@ function UserForm(props) {
 
       <p>Aktivitets Beskrivning:</p>
       <input
-        type="text"
+        type="textarea"
         onChange={(event) => (activityDescription = event.target.value)}
       />
 
       <p>Aktivitets Datum:</p>
       <input
-        type="text"
+        type="datetime-local"
         onChange={(event) => (activityDate = event.target.value)}
       />
 

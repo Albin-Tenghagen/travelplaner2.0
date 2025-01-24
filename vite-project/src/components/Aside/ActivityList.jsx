@@ -4,7 +4,7 @@ import ActivityItem from "./ActivityItem";
 // * @param {Object} props - The props object.
 // * @param {Activity[]} props.ActivityArray - Array of activity objects to display.
 
-function AktivityList({ ActivityArray }) {
+function AktivityList({ ActivityArray, onEdit, onDelete }) {
   console.log("props from Aside", ActivityArray);
   return (
     <section>
@@ -12,7 +12,12 @@ function AktivityList({ ActivityArray }) {
       <section>
         {/* Render each activity as an AktivityItem component */}
         {ActivityArray.map((Activity) => (
-          <ActivityItem key={Activity.id} {...Activity} />
+          <ActivityItem
+            key={Activity.id}
+            {...Activity}
+            onEdit={onEdit}
+            onDelete={onDelete}
+          />
         ))}
       </section>
     </section>

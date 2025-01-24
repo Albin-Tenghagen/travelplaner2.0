@@ -27,12 +27,22 @@ function App() {
     console.log("Activity created", Activity);
     console.log("Array updated", ActivityArray);
   }
-
+  const onEdit = (id) => {
+    console.log("onEdit function called, Activity Id:", id);
+  };
+  const onDelete = (id) => {
+    console.log("ondelete function called, Acticity Id", id);
+    setActivityArray((prev) => prev.filter((Activity) => Activity.id !== id));
+  };
   return (
     <>
       <Header />
       <Main createActivity={createActivity} />
-      <Aside ActivityArray={ActivityArray} />
+      <Aside
+        ActivityArray={ActivityArray}
+        onEdit={onEdit}
+        onDelete={onDelete}
+      />
       <Footer />
     </>
   );
