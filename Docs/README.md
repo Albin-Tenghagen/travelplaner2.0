@@ -20,4 +20,4 @@ Använd kommentarer för att förklara viktig logik.
 ## Validering och Felhantering:
 
 Kontrollera att ingen data sparas om fält är tomma eller ogiltiga.
-Visa feedback till användaren om fel inträffar (t.ex. "Vänligen fyll i alla fält") (Ni har nu förbrukat alla era alerts, jag vill se snygga dynamiska “error-meddelanden, med en “bra” placering).
+Visa feedback till användaren om fel inträffar (t.ex. "Vänligen fyll i alla fält") (Ni har nu förbrukat alla era alerts, jag vill se snygga dynasmiska “error-meddelanden, med en “bra” placering).
