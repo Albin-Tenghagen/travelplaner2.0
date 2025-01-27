@@ -5,7 +5,6 @@ import ActivityItem from "./ActivityItem";
 // * @param {Activity[]} props.ActivityArray - Array of activity objects to display.
 
 function AktivityList({ ActivityArray, onEdit, onDelete }) {
-  console.log("props from Aside", ActivityArray);
   return (
     <section>
       <h3>Sparade Aktiviteter</h3>

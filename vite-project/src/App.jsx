@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Main from "./components/Main/Main";
 import Aside from "./components/Aside/Aside";
+import EditModal from "./Animation-Effects/EditModal";
 
 import "./App.css";
-// * The main App component that manages activities and renders the application layout.
+
 function App() {
-  // State to store the array of activities.
   const [ActivityArray, setActivityArray] = useState([]);
+  const [selectedActivity, setSelectedActivity] = useState(null); // For the modal
+  const [notification, setNotification] = useState(""); // For notifications
+  const [showModal, setShowModal] = useState(false);
 
   // Function to create and add a new activity to the ActivityArray
   function createActivity(newActivity) {
@@ -23,30 +26,64 @@ function App() {
 
     // Update the state with new activity
     setActivityArray([...ActivityArray, Activity]);
-
+    setNotification("Activity added!");
     console.log("Activity created", Activity);
     console.log("Array updated", ActivityArray);
   }
-  const onEdit = (id) => {
-    console.log("onEdit function called, Activity Id:", id);
-  };
+  // Delete an activity
   const onDelete = (id) => {
-    console.log("ondelete function called, Acticity Id", id);
     setActivityArray((prev) => prev.filter((Activity) => Activity.id !== id));
+    setNotification("Activity deleted!");
   };
+
+  // Open the edit modal by updating the modal state
+  const onEdit = (id) => {
+    const activityToEdit = ActivityArray.find((activity) => activity.id === id);
+    setSelectedActivity(activityToEdit);
+    setShowModal(true);
+    setNotification("Activity edited!");
+  };
+
+  // Save the edited activity
+  const saveEdit = (updatedActivity) => {
+    const updatedActivities = ActivityArray.map((activity) =>
+      activity.id === updatedActivity.id ? updatedActivity : activity
+    );
+    setActivityArray(updatedActivities);
+    setShowModal(false);
+    setSelectedActivity(null);
+    setNotification("Activity edited!");
+  };
+
+  // Notification logic with useEffect
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => setNotification(""), 3000); // Clear notification after 3 seconds
+      return () => clearTimeout(timer); // Cleanup to avoid memory leaks
+    }
+  }, [notification]);
+
   return (
     <>
       <Header />
+      {notification && <div className="notification">{notification}</div>}{" "}
+      {/* Notification */}
       <Main createActivity={createActivity} />
       <Aside
         ActivityArray={ActivityArray}
         onEdit={onEdit}
         onDelete={onDelete}
       />
+      {showModal ? (
+        <EditModal
+          activity={selectedActivity}
+          saveEdit={saveEdit}
+          onClose={() => setShowModal(false)}
+        />
+      ) : null}
       <Footer />
     </>
   );
 }
-// Activity interface to outline the Activity object, it was moved outside the function App to be exportable to Aside
 
 export default App;

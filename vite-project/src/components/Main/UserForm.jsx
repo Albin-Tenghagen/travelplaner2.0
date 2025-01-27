@@ -2,72 +2,89 @@
 //  * @param {Object} props - The props object.
 //  * @param {Function} props.createActivity - Function to create and add a new activity.
 
+import { use } from "react";
+import { useState } from "react";
+
 function UserForm(props) {
   const { createActivity } = props;
 
-  // Define local variables to hold the user input
-  let activityName = "";
-  let activityDescription = "";
-  let activityDate = "";
-  let activityLocation = "";
-
-  let alertMessage = "";
+  // Define local states  to capture user input
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [location, setLocation] = useState("");
+  const [date, setDate] = useState("");
+  const [inputErrors, setInputErrors] = useState({});
   // Handle button click to create a new activity
   const handleBtnClick = () => {
     console.log("Button clicked");
-    if (
-      !activityName ||
-      !activityDescription ||
-      !activityLocation ||
-      !activityDate
-    ) {
-      alertMessage = "Alla fält måste fyllas i!";
-      document.getElementById("alertMessage").textContent = alertMessage;
+    const errors = {};
+    if (!name) errors.name = "namn måste fyllas i";
+    if (!description) errors.description = "beskrivning måste fyllas i";
+    if (!location) errors.location = "plats måste fyllas i";
+    if (!date) errors.date = " datum måste fyllas i";
+
+    if (Object.keys(errors).length > 0) {
+      setInputErrors(errors); // Highlight the empty fields
+
       return;
     }
 
-    alertMessage = "";
-    document.getElementById("alertMessage").textContent = alertMessage;
+    // Clear error messages
+    setInputErrors({});
     // Create a new Activity object
     const newActivity = {
-      name: activityName,
-      description: activityDescription,
-      location: activityLocation,
-      date: activityDate,
+      name: name,
+      description: description,
+      location: location,
+      date: date,
     };
 
     // Call the createActivity function passed from the parent
     createActivity(newActivity);
+
+    setName("");
+    setDate("");
+    setDescription("");
+    setLocation("");
   };
 
   return (
     <article>
-      {/* inputs with onChange event to capture the userInput and passing the input value to the localvariables */}
+      {/* inputs with onChange event to capture the userInput and updates the corresponding state with*/}
       <p id="alertMessage" style={{ color: "red" }}></p>
       <p>Aktivitets Namn:</p>
       <input
         type="text"
-        onChange={(event) => (activityName = event.target.value)}
-      />
-
-      <p>Aktivitets Plats:</p>
-      <input
-        type="text"
-        onChange={(event) => (activityLocation = event.target.value)}
+        value={name}
+        placeholder={inputErrors.name || "Skriv in aktivitets namn"}
+        onChange={(event) => setName(event.target.value)}
       />
 
       <p>Aktivitets Beskrivning:</p>
       <input
         type="textarea"
-        onChange={(event) => (activityDescription = event.target.value)}
+        value={description}
+        placeholder={
+          inputErrors.description || "Skriv in aktivitens beskrivning"
+        }
+        onChange={(event) => setDescription(event.target.value)}
       />
 
       <p>Aktivitets Datum:</p>
       <input
-        type="datetime-local"
-        onChange={(event) => (activityDate = event.target.value)}
+        type="date"
+        value={date}
+        placeholder={inputErrors.date || ""}
+        onChange={(event) => setDate(event.target.value)}
       />
 
+      <p>Aktivitets Plats:</p>
+      <input
+        type="text"
+        value={location}
+        placeholder={inputErrors.location || "Skriv in aktivitets plats"}
+        onChange={(event) => setLocation(event.target.value)}
+      />
       {/* Button to save the activity */}
       <button onClick={handleBtnClick}>Spara Aktivitet</button>
     </article>

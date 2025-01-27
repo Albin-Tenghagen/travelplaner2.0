@@ -22,8 +22,8 @@ function AktivityItem({
     <article>
       <h4>{name}</h4>
       <p>{location}</p>
-      <p>{description}</p>
       <p>{date}</p>
+      <p>{description}</p>
       <button onClick={editBtnClick}>Edit</button>
       <button onClick={deleteBtnClick}>Delete</button>
       {/* <input type="checkbox">Complete</input> */}
