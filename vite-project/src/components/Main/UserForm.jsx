@@ -1,8 +1,6 @@
 //  The UserForm component that allows users to input details for a new activity.
 //  * @param {Object} props - The props object.
 //  * @param {Function} props.createActivity - Function to create and add a new activity.
-
-import { use } from "react";
 import { useState } from "react";
 
 function UserForm(props) {

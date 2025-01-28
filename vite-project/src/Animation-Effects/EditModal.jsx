@@ -1,3 +1,7 @@
+// The editModal allows the user to edit existing activities
+//  * @param {Object} activity - the activity to edit
+//  * @param {Function} onClose - updates showModal state to false to cancel edit
+//  * @param {Function} saveEdit - saves the changes made to the activity
 import { useState } from "react";
 
 function EditModal({ activity, saveEdit, onClose }) {
@@ -8,10 +12,11 @@ function EditModal({ activity, saveEdit, onClose }) {
 
   const handleSave = () => {
     const updatedActivity = { ...activity, name, description, date, location };
-    saveEdit(updatedActivity); // Pass updated activity to the parent
+    saveEdit(updatedActivity); // Pass updated activity to App
   };
 
   return (
+    ///TODO egen component för input
     <div className="modal">
       <div className="modal-content">
         <h3>Edit Activity</h3>

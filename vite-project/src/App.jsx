@@ -74,6 +74,7 @@ function App() {
         onEdit={onEdit}
         onDelete={onDelete}
       />
+      {/*ternary operator evaluates if the showModal state is false or true, if false the modal wont render, but if it is true it will render, onClose button sets the state to false, therefore cancelling the edit */}
       {showModal ? (
         <EditModal
           activity={selectedActivity}

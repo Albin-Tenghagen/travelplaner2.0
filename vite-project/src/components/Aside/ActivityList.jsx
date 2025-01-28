@@ -3,6 +3,8 @@ import ActivityItem from "./ActivityItem";
 // The AktivityList component that renders a list of activity items.
 // * @param {Object} props - The props object.
 // * @param {Activity[]} props.ActivityArray - Array of activity objects to display.
+//  * @param {Function} onEdit - enables the user to edit activity
+//  * @param {Function} onDelete - Deletes the activity and removes it from the DOM
 
 function AktivityList({ ActivityArray, onEdit, onDelete }) {
   return (
