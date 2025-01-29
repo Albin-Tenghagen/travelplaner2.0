@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Main from "./components/Main/Main";
 import Aside from "./components/Aside/Aside";
 import EditModal from "./Animation-Effects/EditModal";
+// pages
+import Home from "./pages/Home";
+import About from "./pages/About";
 
 import "./App.css";
 
@@ -65,6 +69,10 @@ function App() {
 
   return (
     <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
       <Header />
       {notification && <div className="notification">{notification}</div>}{" "}
       {/* Notification */}
