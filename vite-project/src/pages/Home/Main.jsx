@@ -1,6 +1,6 @@
 import FormHeading from "./FormHeading";
 import UserForm from "./UserForm";
-import Aside from "../Aside/Aside";
+import Aside from "./Activites/Aside";
 import EditModal from "../../Animation-Effects/EditModal";
 import { useState, useEffect } from "react";
 // The main component that displays a list of activities
